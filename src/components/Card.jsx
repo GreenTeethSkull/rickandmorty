@@ -1,15 +1,15 @@
-import './../components.css';
+import styles from './../styles/card.module.css';
 
 export default function Card(props) {
    return (
-      <div>
-         <button className='btn' onClick={props.onClose}>X</button>
-         <h2>{props.name}</h2>
-         <h2>{props.status}</h2>
-         <h2>{props.species}</h2>
-         <h2>{props.gender}</h2>
-         <h2>{props.origin}</h2>
-         <img src={props.image} alt='image' />
+      <div className={styles.container}>
+         <button className={styles.btn} onClick={props.onClose}>X</button>
+         <img src={props.image} className={styles.img} alt='image' />
+         <h2 className={styles.name}>{props.name}</h2>
+         <h2 className={styles.description}>{props.status}</h2>
+         <h2 className={styles.description}>{props.species}</h2>
+         <h2 className={styles.description}>{props.gender}</h2>
+         <h2 className={`${styles.description}`}>{props.origin}</h2>
       </div>
    );
 }
