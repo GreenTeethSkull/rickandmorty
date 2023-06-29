@@ -6,6 +6,7 @@
     width: 400px;
     height: 70px;
     margin-left: auto;
+    border-radius: 10px 0 0 10px;
 }
 
 .input {
@@ -25,4 +26,36 @@
     background-color: yellow;
     border: none;
     border-radius: 5px;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(134, 134, 0);
+    color: aliceblue;
+}
+
+.button:active {
+    transform: scale(0.8);
+}
+
+.addrandom {
+    height: 50px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(31, 1, 167);
+    border: none;
+    color: aliceblue;
+    border-radius: 5px;
+}
+
+.addrandom:hover {
+    cursor: pointer;
+    background-color: rgb(72, 126, 191);
+    color: black;
+}
+
+.addrandom:active {
+    transform: scale(0.8);
 }

@@ -15,7 +15,7 @@ export default function Cards(props) {
                   gender={elm.gender}
                   origin={elm.origin.name}
                   image={elm.image}
-                  onClose={() => window.alert('Emulamos que se cierra la card')}
+                  onClose={props.onClose}
                />
             ))
          }

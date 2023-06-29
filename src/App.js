@@ -2,13 +2,80 @@ import './App.css';
 import Card from './components/Card.jsx';
 import Cards from './components/Cards.jsx';
 import SearchBar from './components/SearchBar.jsx';
-import characters, { Rick } from './data.js';
+// import characters, { Rick } from './data.js';
+import { useState } from 'react';
+import Nav from './components/Nav';
+import axios from 'axios';
 
 function App() {
+
+   let [characters, setCharacters] = useState([]);
+
+   // const onSearch = (id) => {
+   //    const example = {
+   //       id: 1,
+   //       name: 'Rick Sanchez',
+   //       status: 'Alive',
+   //       species: 'Human',
+   //       gender: 'Male',
+   //       origin: {
+   //          name: 'Earth (C-137)',
+   //          url: `https://rickandmortyapi.com/api/location/${id}`,
+   //       },
+   //       image: `https://rickandmortyapi.com/api/character/avatar/${id}.jpeg`,
+   //    };
+   //    setCharacters([...characters,example]);
+   // }
+
+   function onSearch(id) {
+      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+         if (data.name) {
+            const exist = characters.some((elm) => elm.id === data.id)
+            
+            if (exist) {
+               window.alert('¡Ya existe un personaje con ese id!');
+            } else {
+               setCharacters((oldChars) => [...oldChars, data]);
+            }
+
+         } else {
+            window.alert('¡No hay personajes con este ID!');
+         }
+      }).catch((error)=> {
+         window.alert('¡No hay personajes con este ID!');
+      });
+   }
+
+   function onClose(id) {
+      const filtered = characters.filter((elm)=>elm.id != id);
+      setCharacters(filtered);
+   }
+
+   function onRandomAdd() {
+      let id = Math.floor((Math.random()*825)+1);
+      axios(`https://rickandmortyapi.com/api/character/${id}`).then(({ data }) => {
+         if (data.name) {
+            const exist = characters.some((elm) => elm.id === data.id)
+            
+            if (exist) {
+               onRandomAdd();
+            } else {
+               setCharacters((oldChars) => [...oldChars, data]);
+            }
+
+         } else {
+            onRandomAdd();
+         }
+      }).catch((error)=> {
+         onRandomAdd();
+      });
+   }
+
    return (
       <div className='App'>
-         <SearchBar onSearch={(characterID) => window.alert(characterID)} />
-         <Cards characters={characters} />
+         <Nav search={onSearch} random={onRandomAdd}/>
+         {/* <SearchBar onSearch={(characterID) => window.alert(characterID)} /> */}
+         <Cards characters={characters} onClose={onClose}/>
          {/* <Card
             id={Rick.id}
             name={Rick.name}
