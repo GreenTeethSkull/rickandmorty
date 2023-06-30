@@ -1,4 +1,39 @@
 .nav {
+    display: flex;
     margin: 0;
     background-color: #666;
+    flex-direction: row;
+}
+
+.active {
+    display: flex;
+    background-color: rgb(155, 86, 219);
+    color: black;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 30px;
+    text-decoration: none;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.normal {
+    display: flex;
+    background-color: rgb(89, 71, 105);
+    color: aliceblue;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 30px;
+    text-decoration: none;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.normal:hover {
+    background-color: rgb(151, 116, 182);
+    color: black;
 }

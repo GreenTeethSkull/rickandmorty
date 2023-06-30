@@ -1,0 +1,11 @@
+.container {
+    background-color: black;
+    color: aliceblue;
+    padding: 25px;
+    margin: 25px;
+    border: 1px solid yellow;
+}
+
+.container h1 {
+    text-align: center;
+}

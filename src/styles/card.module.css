@@ -42,15 +42,6 @@
     border-radius: 10px 10px 0 0;
 }
 
-.name {
-    position: absolute;
-    margin-top: 255px;
-    margin-left: 20px;
-    padding: 0 5px 0 5px;
-    background-color: yellow;
-    box-shadow: 0px 0px 11px 2px #606500;
-}
-
 .description {
     margin: 5px 10px 5px 10px;
     display: flex;
@@ -59,4 +50,24 @@
     text-align: center;
     background-color: rgb(110, 189, 189);
     border-radius: 5px;
+}
+
+.links {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 180px;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.name {
+    /* position: absolute;
+    margin-top: 255px;
+    margin-left: 20px; */
+    padding: 0 5px 0 5px;
+    background-color: yellow;
+    box-shadow: 0px 0px 11px 2px #606500;
+    text-decoration: none;
+    color: black;
 }
