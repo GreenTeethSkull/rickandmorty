@@ -37,3 +37,24 @@
     background-color: rgb(151, 116, 182);
     color: black;
 }
+
+.logout {
+    display: flex;
+    background-color: rgb(251, 0, 0);
+    color: aliceblue;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 30px;
+    text-decoration: none;
+    margin: auto;
+    border-radius: 8px;
+    border: none;
+}
+
+.logout:hover {
+    background-color: rgb(255, 122, 122);
+    color: black;
+    cursor: pointer;
+}

@@ -3,18 +3,43 @@ import './App.css';
 import Cards from './components/Cards.jsx';
 // import SearchBar from './components/SearchBar.jsx';
 // import characters, { Rick } from './data.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Nav from './components/Nav';
 import axios from 'axios';
 
-import { Route, Routes } from 'react-router-dom';
+
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import About from './components/About';
 import Detail from './components/Detail';
 import Error from './components/Error';
+import Form from './components/Form';
 
 function App() {
 
+   let navigate = useNavigate();
+
    let [characters, setCharacters] = useState([]);
+   let [access, setAccess] = useState(false);
+
+   let email = 'angel@henry.com';
+   let password = 'angel1234';
+
+   function login (userData) {
+      
+      if ((userData.email===email)&&(userData.password===password)) {
+         setAccess(true);
+         navigate('/home');
+      }
+   }
+
+   function logout () {
+      setAccess(false);
+      navigate('/');
+   }
+
+   useEffect(() => {
+      !access && navigate('/');
+   }, [access]);
 
    // const onSearch = (id) => {
    //    const example = {
@@ -78,7 +103,7 @@ function App() {
 
    return (
       <div className='App'>
-         <Nav search={onSearch} random={onRandomAdd}/>
+         <Nav search={onSearch} logout={logout} random={onRandomAdd}/>
          {/* <SearchBar onSearch={(characterID) => window.alert(characterID)} /> */}
          
          {/* <Card
@@ -92,6 +117,7 @@ function App() {
             onClose={() => window.alert('Emulamos que se cierra la card')}
          /> */}
          <Routes>
+            <Route path='/' element={<Form login={login} />} />
             <Route path='/home' element={<Cards characters={characters} onClose={onClose}/>} />
             <Route path='/about' element={<About/>} />
             <Route path='/detail/:id' element={<Detail/>} />
