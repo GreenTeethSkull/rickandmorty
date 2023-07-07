@@ -13,6 +13,7 @@ import About from './components/About';
 import Detail from './components/Detail';
 import Error from './components/Error';
 import Form from './components/Form';
+import Favorites from './components/Favorites';
 
 function App() {
 
@@ -121,6 +122,7 @@ function App() {
             <Route path='/home' element={<Cards characters={characters} onClose={onClose}/>} />
             <Route path='/about' element={<About/>} />
             <Route path='/detail/:id' element={<Detail/>} />
+            <Route path='/favorites' element={<Favorites/>} />
             <Route path='*' element={<Error/>} />
          </Routes>
       </div>

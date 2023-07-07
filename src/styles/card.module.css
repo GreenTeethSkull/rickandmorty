@@ -71,3 +71,32 @@
     text-decoration: none;
     color: black;
 }
+
+.btnheart {
+    /* background-color: green; */
+    background-color: transparent;
+    border: 0px;
+    width: 30px;
+    height: 30px;
+    /* color: rgb(224, 224, 224); */
+    border-radius: 10px;
+    /* padding: 3px; */
+    display: grid;
+    align-content: center;
+    /* border: 1px solid black; */
+    position: absolute;
+    font-size: larger;
+    /* margin-right: 1em; */
+    left: 0;
+}
+
+.btnheart:hover {
+    cursor: pointer;
+    /* background-color: rgb(139, 9, 9); */
+}
+
+.btnheart:active {
+    cursor: pointer;
+    /* background-color: rgb(139, 9, 9); */
+    transform: scale(0.8);
+}
