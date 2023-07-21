@@ -7,22 +7,33 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        // case ADD_FAV:
+        //     const copy = [...state.allCharacters,action.payload]
+        //     return {
+        //         ...state,
+        //         myFavorites: copy,
+        //         allCharacters: [...copy], 
+        //     }
         case ADD_FAV:
-            const copy = [...state.allCharacters,action.payload]
             return {
                 ...state,
-                myFavorites: copy,
-                allCharacters: [...copy], 
-            }
-        case REMOVE_FAV:
-            let filterlist = state.myFavorites.filter(elm => elm.id !== action.payload);
+                myFavorites: action.payload,
+                allCharacters: action.payload
+            };
+        // case REMOVE_FAV:
+        //     let filterlist = state.myFavorites.filter(elm => elm.id !== action.payload);
 
-            return {
-                ...state,
-                myFavorites: filterlist
-            }
-        case FILTER: 
-            
+        //     return {
+        //         ...state,
+        //         myFavorites: filterlist
+        //     }
+        case REMOVE_FAV:
+            return { 
+                ...state, 
+                myFavorites: action.payload 
+            };
+        case FILTER:
+
             let filter = state.allCharacters.filter(elm => elm.gender === action.payload);
 
             return {
@@ -33,9 +44,9 @@ const reducer = (state = initialState, action) => {
             let order = state.allCharacters
 
             if (action.payload === 'A') {
-                order.sort((a,b)=>a.id-b.id);
+                order.sort((a, b) => a.id - b.id);
             } else {
-                order.sort((a,b)=>b.id-a.id);
+                order.sort((a, b) => b.id - a.id);
             }
 
             return {
@@ -49,7 +60,7 @@ const reducer = (state = initialState, action) => {
             }
 
         default:
-            return {...state};
+            return { ...state };
     }
 }
 
