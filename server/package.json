@@ -13,6 +13,7 @@
   "author": "angel",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
     "nodemon": "^3.0.1"
   }
 }
