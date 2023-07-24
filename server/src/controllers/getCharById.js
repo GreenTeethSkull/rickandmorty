@@ -21,15 +21,42 @@ const URL = 'https://rickandmortyapi.com/api/character/';
 //     });
 // }
 
-function getCharById(req,res) {
+// function getCharById(req,res) {
+//     const { id } = req.params;
+
+//     axios(`${URL}${id}`).then(({ data }) => {
+
+//         if (data.error) {
+//             return res.status(404).send('Not found');
+//         }
+
+//         let obj = {
+//             id: Number(id),
+//             name: data.name,
+//             gender: data.gender,
+//             species: data.species,
+//             origin: data.origin,
+//             image: data.image,
+//             status: data.status
+//         };
+
+//         res.status(200).json(obj);
+//     }).catch((error) => {
+//         res.status(500).send(error.message);
+//     });
+// }
+async function getCharById (req,res) {
+
     const { id } = req.params;
 
-    axios(`${URL}${id}`).then(({ data }) => {
-
+    try {
+        const apiRequest = await axios(`${URL}${id}`);
+        const { data } = apiRequest;
+        
         if (data.error) {
             return res.status(404).send('Not found');
         }
-
+        
         let obj = {
             id: Number(id),
             name: data.name,
@@ -39,11 +66,11 @@ function getCharById(req,res) {
             image: data.image,
             status: data.status
         };
-
-        res.status(200).json(obj);
-    }).catch((error) => {
-        res.status(500).send(error.message);
-    });
+        return res.status(200).json(obj);
+        
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }   
 }
 
 module.exports = {

@@ -14,13 +14,25 @@ export const RESET = 'RESET';
 
 export const addFav = (character) => {
     const endpoint = 'http://localhost:3001/rickandmorty/fav';
-    return (dispatch) => {
-        axios.post(endpoint, character).then(({ data }) => {
+    return async (dispatch) => {
+        // axios.post(endpoint, character).then(({ data }) => {
+        //     return dispatch({
+        //         type: 'ADD_FAV',
+        //         payload: data,
+        //     });
+        // });
+
+        try {
+            const resp = await axios.post(endpoint, character);
+            const { data } = resp;
+
             return dispatch({
                 type: 'ADD_FAV',
                 payload: data,
             });
-        });
+        } catch (error) {
+            window.alert(error.message);
+        }
     };
 };
 
@@ -33,13 +45,25 @@ export const addFav = (character) => {
 
 export const removeFav = (id) => {
     const endpoint = 'http://localhost:3001/rickandmorty/fav/' + id;
-    return (dispatch) => {
-        axios.delete(endpoint).then(({ data }) => {
+    return async (dispatch) => {
+        // axios.delete(endpoint).then(({ data }) => {
+        //     return dispatch({
+        //         type: 'REMOVE_FAV',
+        //         payload: data,
+        //     });
+        // });
+
+        try {
+            const resp = await axios.delete(endpoint);
+            const { data } = resp;
+
             return dispatch({
                 type: 'REMOVE_FAV',
                 payload: data,
             });
-        });
+        } catch (error) {
+            window.alert(error.message);
+        }
     };
 };
 

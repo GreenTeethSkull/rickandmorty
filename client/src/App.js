@@ -26,24 +26,35 @@ function App() {
    let password = 'angel1234';
 
    // function login (userData) {
-      
+
    //    if ((userData.email===email)&&(userData.password===password)) {
    //       setAccess(true);
    //       navigate('/home');
    //    }
    // }
 
-   function login(userData) {
+   async function login(userData) {
       const { email, password } = userData;
       const URL = 'http://localhost:3001/rickandmorty/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      // axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      //    const { access } = data;
+      //    setAccess(data);
+      //    access && navigate('/home');
+      // });
+
+      try {
+         const backlog = await axios(URL + `?email=${email}&password=${password}`);
+
+         const { data } = backlog;
          const { access } = data;
          setAccess(data);
          access && navigate('/home');
-      });
+      } catch (error) {
+         window.alert(error.message);
+      }
    }
 
-   function logout () {
+   function logout() {
       setAccess(false);
       navigate('/');
    }
@@ -68,11 +79,30 @@ function App() {
    //    setCharacters([...characters,example]);
    // }
 
-   function onSearch(id) {
-      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+   async function onSearch(id) {
+      // axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+      //    if (data.name) {
+      //       const exist = characters.some((elm) => elm.id === data.id)
+
+      //       if (exist) {
+      //          window.alert('¡Ya existe un personaje con ese id!');
+      //       } else {
+      //          setCharacters((oldChars) => [...oldChars, data]);
+      //       }
+
+      //    } else {
+      //       window.alert('¡No hay personajes con este ID!');
+      //    }
+      // }).catch((error) => {
+      //    window.alert('¡No hay personajes con este ID!');
+      // });
+
+      try {
+         const backreq = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         const { data } = backreq;
          if (data.name) {
             const exist = characters.some((elm) => elm.id === data.id)
-            
+
             if (exist) {
                window.alert('¡Ya existe un personaje con ese id!');
             } else {
@@ -82,22 +112,41 @@ function App() {
          } else {
             window.alert('¡No hay personajes con este ID!');
          }
-      }).catch((error)=> {
-         window.alert('¡No hay personajes con este ID!');
-      });
+      } catch (error) {
+         window.alert(error.message);
+      }
    }
 
    function onClose(id) {
-      const filtered = characters.filter((elm)=>elm.id !== id);
+      const filtered = characters.filter((elm) => elm.id !== id);
       setCharacters(filtered);
    }
 
-   function onRandomAdd() {
-      let id = Math.floor((Math.random()*825)+1);
-      axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+   async function onRandomAdd() {
+      let id = Math.floor((Math.random() * 825) + 1);
+      // axios(`http://localhost:3001/rickandmorty/character/${id}`).then(({ data }) => {
+      //    if (data.name) {
+      //       const exist = characters.some((elm) => elm.id === data.id)
+
+      //       if (exist) {
+      //          onRandomAdd();
+      //       } else {
+      //          setCharacters((oldChars) => [...oldChars, data]);
+      //       }
+
+      //    } else {
+      //       onRandomAdd();
+      //    }
+      // }).catch((error) => {
+      //    onRandomAdd();
+      // });
+      
+      try {
+         const backran = await axios(`http://localhost:3001/rickandmorty/character/${id}`);
+         const { data } = backran;
          if (data.name) {
             const exist = characters.some((elm) => elm.id === data.id)
-            
+
             if (exist) {
                onRandomAdd();
             } else {
@@ -107,16 +156,17 @@ function App() {
          } else {
             onRandomAdd();
          }
-      }).catch((error)=> {
+      } catch (err) {
          onRandomAdd();
-      });
+      }
+
    }
 
    return (
       <div className='App'>
-         <Nav search={onSearch} logout={logout} random={onRandomAdd}/>
+         <Nav search={onSearch} logout={logout} random={onRandomAdd} />
          {/* <SearchBar onSearch={(characterID) => window.alert(characterID)} /> */}
-         
+
          {/* <Card
             id={Rick.id}
             name={Rick.name}
@@ -129,11 +179,11 @@ function App() {
          /> */}
          <Routes>
             <Route path='/' element={<Form login={login} />} />
-            <Route path='/home' element={<Cards characters={characters} onClose={onClose}/>} />
-            <Route path='/about' element={<About/>} />
-            <Route path='/detail/:id' element={<Detail/>} />
-            <Route path='/favorites' element={<Favorites/>} />
-            <Route path='*' element={<Error/>} />
+            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/detail/:id' element={<Detail />} />
+            <Route path='/favorites' element={<Favorites />} />
+            <Route path='*' element={<Error />} />
          </Routes>
       </div>
    );
